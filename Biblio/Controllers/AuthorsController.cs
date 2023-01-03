@@ -7,12 +7,12 @@ namespace Biblio.Controllers
     public class AuthorsController : Controller
     {
         private readonly AppDbContext _context;
+        //private readonly IAuthorsService _service;
 
         public AuthorsController(AppDbContext context)
         {
             _context = context;
         }
-
 
         // GET: AuthorsController
         public ActionResult Index()
@@ -20,12 +20,13 @@ namespace Biblio.Controllers
             var allAuthors = _context.Authors.ToList();
             return View(allAuthors);
         }
-
+        
         // GET: AuthorsController/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
+
 
         // GET: AuthorsController/Create
         public ActionResult Create()

@@ -1,14 +1,19 @@
 using Biblio.Data;
+using Biblio.Data.Service;
+using Biblio.Data.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-//DbContext configuration
 
+//DbContext configuration
 
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer
 (builder.Configuration.GetConnectionString("DefaultConnectionString")));
 
+//Service configuration
 
+builder.Services.AddScoped<IAuthorsService, AuthorsService>();
+builder.Services.AddScoped<IBooksService, BooksService>();
 
 // Add services to the container.
 

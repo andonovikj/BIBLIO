@@ -1,23 +1,25 @@
 ﻿using Biblio.Data;
+using Biblio.Data.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Biblio.Controllers
 {
     public class AuthorsController : Controller
     {
-        private readonly AppDbContext _context;
-        //private readonly IAuthorsService _service;
+        //private readonly AppDbContext _context;
+        private readonly IAuthorsService _service;
 
-        public AuthorsController(AppDbContext context)
+        public AuthorsController(IAuthorsService service)
         {
-            _context = context;
+            _service = service;
         }
 
         // GET: AuthorsController
-        public ActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var allAuthors = _context.Authors.ToList();
+            var allAuthors = await _service.GetAll();
             return View(allAuthors);
         }
         

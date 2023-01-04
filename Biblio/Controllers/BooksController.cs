@@ -1,23 +1,28 @@
 ﻿using Biblio.Data;
+using Biblio.Data.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Biblio.Controllers
 {
     public class BooksController : Controller
     {
-        private readonly AppDbContext _context;
+        //private readonly AppDbContext _context;
 
-        public BooksController(AppDbContext context)
+        private readonly IBooksService _service;
+
+
+        public BooksController(IBooksService service)
         {
-            _context = context;
+            _service = service;
         }
 
 
         // GET: BooksController
-        public ActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var allBooks = _context.Books.ToList();
+            var allBooks = await _service.GetAll();
             return View(allBooks);
         }
 

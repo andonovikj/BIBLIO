@@ -14,7 +14,7 @@ namespace Biblio.Data
             {
                 var context = serviceScope.ServiceProvider.GetService<AppDbContext>();
 
-                //context.Database.EnsureCreated();
+                context.Database.EnsureCreated();
 
                 if (!context.Authors.Any())
                 {
@@ -44,13 +44,16 @@ namespace Biblio.Data
                         }
                     });
                     context.SaveChanges();
+                }
 
+                if (!context.Books.Any())
+                {
                     context.Books.AddRange(new List<Book>()
                     {
                         new Book()
                         {
                             Title = "Book 1",
-                            Description = "This is the Bio of AutBookhor 1",
+                            Description = "This is the Bio of Book 1",
                             BookCoverURL = "http://dotnethow.net/images/actors/actor-1.jpeg",
                             Rating = 5.5,
                             genre = Enums.Genre.Fantasy,

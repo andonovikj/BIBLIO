@@ -1,5 +1,6 @@
 ﻿using Biblio.Data;
 using Biblio.Data.Services;
+using Biblio.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -27,9 +28,12 @@ namespace Biblio.Controllers
         }
 
         // GET: BooksController/Details/5
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(int id)
         {
-            return View();
+            var bookDetails = await _service.GetByIdAsync(id);
+
+            if (bookDetails == null) return View("NotFound");
+            return View(bookDetails);
         }
 
         // GET: BooksController/Create
@@ -41,58 +45,76 @@ namespace Biblio.Controllers
         // POST: BooksController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult> CreateAsync(IFormCollection formCollection)
         {
-            try
+            if (ModelState.IsValid)
             {
+                Book book = new Book();
+                book.Title = formCollection["Title"];
+                book.Description = formCollection["Description"];
+                book.BookCoverURL = formCollection["BookCoverURL"];
+                book.Rating = Convert.ToDouble(formCollection["Rating"]);
+                var value = formCollection["genre"];
+                book.genre = (Data.Enums.Genre)Convert.ToInt32(value);
+                await _service.AddAsync(book);
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            return View();
         }
 
         // GET: BooksController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> EditAsync(int id)
         {
-            return View();
+            var bookDetails = await _service.GetByIdAsync(id);
+
+            if (bookDetails == null) return View("NotFound");
+            return View(bookDetails);
         }
+    
 
         // POST: BooksController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> EditAsync(int id, IFormCollection formCollection)
         {
-            try
+            if (ModelState.IsValid) //checks for validations [Required]
             {
+                Book book = await _service.GetByIdAsync(id);
+
+                book.Title = formCollection["Title"];
+                book.Description = formCollection["Description"];
+                book.BookCoverURL = formCollection["BookCoverURL"];
+                book.Rating = Convert.ToDouble(formCollection["Rating"]);
+                var value = formCollection["genre"];
+                book.genre = (Data.Enums.Genre)Convert.ToInt32(value);
+
+                await _service.UpdateAsync(id, book);
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+
+            return View();
         }
 
         // GET: BooksController/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            return View();
+            var bookDetails = await _service.GetByIdAsync(id);
+
+            if (bookDetails == null) return View("NotFound");
+            return View(bookDetails);
         }
 
         // POST: BooksController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> DeleteAsync(int id, IFormCollection collection)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            var bookDetails = await _service.GetByIdAsync(id);
+            if (bookDetails == null) return View("NotFound");
+
+            await _service.DeleteAsync(id);
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }

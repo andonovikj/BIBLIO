@@ -6,10 +6,12 @@ namespace Biblio.Data.Services
     {
         Task<IEnumerable<Book>> GetAll();
 
-        Book GetById(int id);
+        Task <Book> GetByIdAsync(int id);
 
-        void Add(Book author);
+        Task AddAsync(Book book);
 
-        Book Update(int id, Book newAuthor);
+        Task<Book> UpdateAsync(int id, Book newBook);
+
+        Task DeleteAsync(int id);
     }
 }

@@ -13,9 +13,10 @@ namespace Biblio.Data.Services
             _context = context;
         }        
 
-        public void Add(Book author)
+        public async Task AddAsync(Book book)
         {
-            throw new NotImplementedException();
+            await _context.Books.AddAsync(book);
+            await _context.SaveChangesAsync();
         }
 
         
@@ -25,15 +26,25 @@ namespace Biblio.Data.Services
             return result;
         }
 
-        public Book GetById(int id)
+        public async Task<Book> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var result = await _context.Books.FirstOrDefaultAsync(n => n.Id == id);
+            return result;
         }
 
-        public Book Update(int id, Book newAuthor)
+        public async Task<Book> UpdateAsync(int id, Book newBook)
         {
-            throw new NotImplementedException();
+            _context.Update(newBook);
+            await _context.SaveChangesAsync();
+            return newBook;
         }
-                      
+
+        public async Task DeleteAsync(int id)
+        {
+            var result = await _context.Books.FirstOrDefaultAsync(n => n.Id == id);
+            _context.Books.Remove(result);
+            await _context.SaveChangesAsync();
+        }
+
     }
 }

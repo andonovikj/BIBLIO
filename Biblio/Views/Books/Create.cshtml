@@ -1,4 +1,4 @@
-﻿@model Biblio.Models.Author
+﻿@model Biblio.Models.Book
 
 @{
     ViewData["Title"] = "Create";
@@ -6,26 +6,31 @@
 
 <h1>Create</h1>
 
-<h4>Author</h4>
+<h4>Book</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Bio" class="control-label"></label>
-                <input asp-for="Bio" class="form-control" />
-                <span asp-validation-for="Bio" class="text-danger"></span>
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ProfilePictureURL" class="control-label"></label>
-                <input asp-for="ProfilePictureURL" class="form-control" />
-                <span asp-validation-for="ProfilePictureURL" class="text-danger"></span>
+                <label asp-for="Rating" class="control-label"></label>
+                <input asp-for="Rating" class="form-control" />
+                <span asp-validation-for="Rating" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BookCoverURL" class="control-label"></label>
+                <input asp-for="BookCoverURL" class="form-control" />
+                <span asp-validation-for="BookCoverURL" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="genre" class="control-label"></label>
@@ -38,6 +43,13 @@
                     <option value="5" name="Thriller">Thriller</option>
                 </select>
                 <span asp-validation-for="genre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AuthorId" class="control-label"></label>
+                <select asp-for="AuthorId" class ="form-control" asp-items="ViewBag.AuthorId">
+                    <option value="0" name="Biography">1</option>
+                    <option value="1" name="Fantasy">2</option>
+                </select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

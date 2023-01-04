@@ -13,9 +13,10 @@ namespace Biblio.Data.Service
             _context = context;
         }
 
-        public void Add(Author author)
+        public async Task AddAsync(Author author)
         {
-            throw new NotImplementedException();
+            await _context.Authors.AddAsync(author);
+            await _context.SaveChangesAsync(); 
         }
 
         public async Task<IEnumerable<Author>> GetAll()
@@ -24,14 +25,24 @@ namespace Biblio.Data.Service
             return result;
         }
 
-        public Author GetById(int id)
+        public async Task<Author> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var result = await _context.Authors.FirstOrDefaultAsync(n => n.Id == id);
+            return result;
         }
 
-        public Author Update(int id, Author newAuthor)
+        public async Task<Author> UpdateAsync(int id, Author newAuthor)
         {
-            throw new NotImplementedException();
+            _context.Update(newAuthor);
+            await _context.SaveChangesAsync();
+            return newAuthor;
+        }
+
+        public async Task DeleteAsync(int id)
+        {           
+            var result = await _context.Authors.FirstOrDefaultAsync(n => n.Id == id);
+            _context.Authors.Remove(result);
+            await _context.SaveChangesAsync();
         }
     }
 }

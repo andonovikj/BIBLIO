@@ -9,7 +9,7 @@ namespace Biblio.Models
         [Key]
         public int Id { get; set; }
         [Display(Name = "Title")]
-        public string? Title { get; set; }
+        public string Title { get; set; }
 
         [Display(Name = "Description")]
         public string Description { get; set; }

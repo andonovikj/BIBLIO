@@ -58,6 +58,7 @@ namespace Biblio.Data
                             Rating = 5.5,
                             genre = Enums.Genre.Fantasy,
                             AuthorId = 1
+                            
                         },
                         new Book()
                         {

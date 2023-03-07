@@ -1,8 +1,10 @@
 ﻿using Biblio.Data.Enums;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Biblio.Models
 {
+    [Table("Authors")]
     public class Author
     {
         [Key]
@@ -24,5 +26,10 @@ namespace Biblio.Models
         //Relationships
         [Display(Name = "Books")]
         public List<Book> Books { get; set; }
+
+        public Author()
+        {
+            Books = new List<Book>();
+        }
     }
 }

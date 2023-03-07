@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Biblio.Models
 {
+    [Table("Books")]
     public class Book
     {
         [Key]
@@ -30,9 +31,11 @@ namespace Biblio.Models
         
         public int AuthorId { get; set; }
         [ForeignKey("AuthorId")]
-
         [Display(Name = "Author")]
-        public Author author { get; set; }
+        public Author Author { get; set; }
+
+        
+        public Book() { }
 
         //public List<Review> reviews { get; set; }
     }

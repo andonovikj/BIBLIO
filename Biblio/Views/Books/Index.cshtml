@@ -28,7 +28,10 @@
                 @Html.DisplayNameFor(model => model.genre)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.author)
+                @Html.DisplayNameFor(model => model.AuthorId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Author)
             </th>
             <th></th>
         </tr>
@@ -52,7 +55,10 @@
                 @Html.DisplayFor(modelItem => item.genre)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.author.Id)
+                @Html.DisplayFor(modelItem => item.AuthorId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Author.Name)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

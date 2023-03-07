@@ -56,6 +56,7 @@ namespace Biblio.Controllers
                 book.Rating = Convert.ToDouble(formCollection["Rating"]);
                 var value = formCollection["genre"];
                 book.genre = (Data.Enums.Genre)Convert.ToInt32(value);
+                book.AuthorId = Convert.ToInt32(formCollection["AuthorId"]);
                 await _service.AddAsync(book);
                 return RedirectToAction(nameof(Index));
             }

@@ -25,9 +25,9 @@ namespace Biblio.Controllers
         }
 
         // GET: AuthorsController/Details/5
-        public async Task<ActionResult> DetailsAsync(int id)
+        public ActionResult DetailsAsync(int id)
         {
-            var authorDetails = await _service.GetByIdAsync(id);
+            var authorDetails =  _service.GetById(id);
 
             if (authorDetails == null) return View("NotFound");
             return View(authorDetails);

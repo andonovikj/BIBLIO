@@ -41,6 +41,20 @@ namespace Biblio.Data
                             Bio = "This is the Bio of Author 3",
                             ProfilePictureURL = "http://dotnethow.net/images/actors/actor-3.jpeg",
                             genre = Enums.Genre.Fantasy
+                        },
+                        new Author()
+                        {
+                            Name = "Author 4",
+                            Bio = "This is the Bio of Author 4",
+                            ProfilePictureURL = "http://dotnethow.net/images/actors/actor-4.jpeg",
+                            genre = Enums.Genre.Biography
+                        },
+                        new Author()
+                        {
+                            Name = "Author 5",
+                            Bio = "This is the Bio of Author 5",
+                            ProfilePictureURL = "http://dotnethow.net/images/actors/actor-5.jpeg",
+                            genre = Enums.Genre.Mystery
                         }
                     });
                     context.SaveChanges();
@@ -57,8 +71,7 @@ namespace Biblio.Data
                             BookCoverURL = "http://dotnethow.net/images/actors/actor-1.jpeg",
                             Rating = 5.5,
                             genre = Enums.Genre.Fantasy,
-                            AuthorId = 1
-                            
+                            AuthorId = 1                            
                         },
                         new Book()
                         {
@@ -76,7 +89,7 @@ namespace Biblio.Data
                             BookCoverURL = "http://dotnethow.net/images/actors/actor-3.jpeg",
                             Rating = 2.6,
                             genre = Enums.Genre.Mystery,
-                            AuthorId = 1
+                            AuthorId = 3
                         }
                     });
                     context.SaveChanges();

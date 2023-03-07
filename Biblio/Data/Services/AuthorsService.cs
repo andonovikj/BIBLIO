@@ -25,6 +25,12 @@ namespace Biblio.Data.Service
             return result;
         }
 
+        public Author GetById(int id)
+        {
+            var result =  _context.Authors.FirstOrDefault(n => n.Id == id);
+            return result;
+        }
+
         public async Task<Author> GetByIdAsync(int id)
         {
             var result = await _context.Authors.FirstOrDefaultAsync(n => n.Id == id);

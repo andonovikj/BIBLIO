@@ -5,21 +5,13 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//DbContext configuration
+// Add services to the container.
+builder.Services.AddControllersWithViews();
 
-builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer
-(builder.Configuration.GetConnectionString("DefaultConnectionString")));
-
-//Service configuration
+builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetSection("ConnectionStrings:DefaultConnectionString").Value));
 
 builder.Services.AddScoped<IAuthorsService, AuthorsService>();
 builder.Services.AddScoped<IBooksService, BooksService>();
-
-// Add services to the container.
-
-builder.Services.AddControllersWithViews();
-
-
 
 var app = builder.Build();
 
@@ -38,11 +30,11 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+//Seed Database
+AppDbInitializer.Seed(app);
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-
-//Seed DataBase
-AppDbInitializer.Seed(app);
 
 app.Run();

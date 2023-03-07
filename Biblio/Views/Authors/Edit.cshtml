@@ -1,4 +1,5 @@
-﻿@model Biblio.Models.Author
+﻿@using Biblio.Data.Enums
+@model Biblio.Models.Author
 
 @{
     ViewData["Title"] = "Edit";
@@ -30,14 +31,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="genre" class="control-label"></label>
-                <select asp-for="genre" class="form-control">
-                    <option value="0" name="Biography">Biography</option>
-                    <option value="1" name="Fantasy">Fantasy</option>
-                    <option value="2" name="Horror">Horror</option>
-                    <option value="3" name="Mystery">Mystery</option>
-                    <option value="4" name="SciFi">SciFi</option>
-                    <option value="5" name="Thriller">Thriller</option>
-                </select>
+                <select asp-for="genre" class="form-control" asp-items="Html.GetEnumSelectList<Genre>()"></select>
                 <span asp-validation-for="genre" class="text-danger"></span>
             </div>
             <div class="form-group">

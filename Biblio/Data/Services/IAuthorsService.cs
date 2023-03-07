@@ -6,6 +6,8 @@ namespace Biblio.Data.Service
     {
         Task<IEnumerable<Author>> GetAll();
 
+        Author GetById(int id);
+
         Task <Author> GetByIdAsync(int id);
 
         Task AddAsync(Author author);
